@@ -12,7 +12,7 @@ struct MoviesTabView: View {
     var body: some View {
         TabView (selection : $selectedTab)
         {
-            ContentView()
+            RecommendedView()
                 .badge("2")
                 .tabItem{
                 Image(systemName: "popcorn")

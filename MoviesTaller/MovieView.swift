@@ -23,7 +23,6 @@ struct MovieView: View {
                 .font(.title2)
                 .foregroundColor(.pink)
                 .scaleEffect(isMovieLiked ? 1.18 : 1.0)
-                .animation(.spring())
                 .onTapGesture {
                     withAnimation{
                     isMovieLiked.toggle()}

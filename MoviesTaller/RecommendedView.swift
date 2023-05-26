@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct ContentView: View {
+struct RecommendedView: View {
     init() {
         let appereance = UINavigationBarAppearance()
         appereance.titleTextAttributes = [.foregroundColor : UIColor.systemBackground, .font : UIFont.monospacedDigitSystemFont(ofSize: 16, weight: .bold)]
@@ -36,6 +36,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RecommendedView()
     }
 }
