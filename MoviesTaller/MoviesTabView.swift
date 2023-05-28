@@ -13,7 +13,7 @@ struct MoviesTabView: View {
         TabView (selection : $selectedTab)
         {
             RecommendedView()
-                .badge("2")
+                .badge("5")
                 .tabItem{
                 Image(systemName: "popcorn")
                 Text("All Movies")

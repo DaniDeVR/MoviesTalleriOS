@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 
 struct RecommendedView: View {
+    @StateObject var moviesViewModel = MoviesViewModel()
     init() {
         let appereance = UINavigationBarAppearance()
         appereance.titleTextAttributes = [.foregroundColor : UIColor.systemBackground, .font : UIFont.monospacedDigitSystemFont(ofSize: 16, weight: .bold)]
@@ -21,16 +22,18 @@ struct RecommendedView: View {
         UINavigationBar.appearance().tintColor = UIColor.systemBackground
     }
     var body: some View {
-        
         NavigationView{
-            List(0..<20)
-            {movie in 
-                MovieView()
+            List(moviesViewModel.movies)
+            { movie in MovieView(movieType: movie)
             }.padding(.top,20)
             .navigationBarTitle(Text("Recomendaciones para ti"),displayMode: .large)
             .listStyle(.plain)
             
         }
+        .onAppear {
+                 moviesViewModel.fetchPopularMovies()
+             }
+             .environmentObject(moviesViewModel)
     }
 }
 

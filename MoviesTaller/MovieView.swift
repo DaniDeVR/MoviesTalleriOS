@@ -9,14 +9,33 @@ import SwiftUI
 
 struct MovieView: View {
     @State private var isMovieLiked = false
+    
+    let movieType: Movie
+       let baseURL = "https://image.tmdb.org/t/p/original"
+       let imageURL: URL
+       
+       init(movieType: Movie) {
+           self.movieType = movieType
+           let movieImageUrl = baseURL + movieType.poster_path
+           self.imageURL = URL(string: movieImageUrl)!
+       }
     var body: some View {
         HStack (spacing: 10){
-            Image("wakanda").resizable().scaledToFit().frame(height: 70).cornerRadius(5)
+            
+            AsyncImage(url: imageURL, content: { image in
+                image.resizable()
+                     .aspectRatio(contentMode: .fit)
+                     .frame(maxWidth: 300, maxHeight: 100)
+                     .cornerRadius(5)
+              
+            }  ,placeholder: {
+                ProgressView()
+            })
             VStack(alignment: .leading, spacing: 10){
-                Text("Wakanda Forever").fontWeight(.bold).foregroundColor(.pink)
+                Text(movieType.title).fontWeight(.bold).foregroundColor(.pink)
                 VStack(alignment: .leading, spacing: 4){
-                Text("Fecha de estreno")
-                    Text("1 enero 2022").foregroundColor(.secondary)}
+                    Text("Fecha de estreno")
+                    Text(movieType.release_date).foregroundColor(.secondary)}
                 
             }
             Image(systemName: isMovieLiked ? "heart.fill" : "suit.heart" )
@@ -32,8 +51,8 @@ struct MovieView: View {
     }
 }
 
-struct MovieView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieView()
-    }
-}
+//struct MovieView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieView(movieType: <#Movie#>)
+//    }
+//}
