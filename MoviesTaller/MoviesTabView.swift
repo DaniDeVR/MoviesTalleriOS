@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct MoviesTabView: View {
+    @StateObject var moviesViewModel = MoviesViewModel()
     @State var selectedTab : Int = 0
     var body: some View {
         TabView (selection : $selectedTab)
         {
             RecommendedView()
-                .badge("5")
+                .environmentObject(moviesViewModel)
+//                .badge("")
                 .tabItem{
                 Image(systemName: "popcorn")
                 Text("All Movies")
             }.environment(\.symbolVariants, .circle)
             
-            FavoritesView().tabItem{
+            FavoritesView()
+                .environmentObject(moviesViewModel)
+                .tabItem{
                 Label("Favorites",systemImage: "bolt.heart")
                     .environment(\.symbolVariants, .none)
             }

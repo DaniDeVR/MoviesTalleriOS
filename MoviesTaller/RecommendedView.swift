@@ -9,11 +9,11 @@ import SwiftUI
 import UIKit
 
 struct RecommendedView: View {
-    @StateObject var moviesViewModel = MoviesViewModel()
+    @EnvironmentObject var moviesViewModel : MoviesViewModel
     init() {
         let appereance = UINavigationBarAppearance()
         appereance.titleTextAttributes = [.foregroundColor : UIColor.systemBackground, .font : UIFont.monospacedDigitSystemFont(ofSize: 16, weight: .bold)]
-        appereance.largeTitleTextAttributes = [.foregroundColor : UIColor.systemBackground, .font : UIFont.monospacedDigitSystemFont(ofSize: 26, weight: .black)]
+        appereance.largeTitleTextAttributes = [.foregroundColor : UIColor.systemBackground, .font : UIFont.monospacedDigitSystemFont(ofSize: 26, weight: .bold)]
         appereance.backgroundColor = UIColor.systemPink
         
         UINavigationBar.appearance().standardAppearance = appereance
@@ -33,7 +33,6 @@ struct RecommendedView: View {
         .onAppear {
                  moviesViewModel.fetchPopularMovies()
              }
-             .environmentObject(moviesViewModel)
     }
 }
 
